@@ -1,85 +1,69 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Auth Boilerplate
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este repositório contém uma aplicação backend desenvolvida com o framework [NestJS](https://nestjs.com/). A aplicação inclui funcionalidades como cadastro e login de usuários, autenticação JWT, verificação de email, recuperação de senha, autenticação de dois fatores e tarefas agendadas para manutenção de usuários.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## ✨ Funcionalidades
 
-## Description
+- **Cadastro de Usuário**: Implementação com verificação de email.
+- **Login de Usuário**: Login com autenticação JWT.
+- **Logout de Usuário**: Logout com invalidação do token JWT.
+- **Verificação de Email**: Envio de email de verificação para confirmar propriedade do email.
+- **Recuperação de Senha**: Recuperação de senha via email com token de redefinição.
+- **Alteração de Senha Autenticada**: Alteração de senha informando a senha antiga.
+- **Criação de Tarefas**: Serviço para remover usuários não verificados após um período.
+- **Bloqueio de Conta**: Bloqueio temporário após várias tentativas de login falhas.
+- **Autenticação de Dois Fatores**: Ativação e desativação de 2FA (Two-Factor Authentication).
+- **Papéis (Roles)**: Proteção de rotas específicas
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## 🛠️ Instalação
 
-```bash
-$ npm install
-```
+1. Instale as dependências:
 
-## Compile and run the project
+    ```bash
+    $ npm install
+    ```
 
-```bash
-# development
-$ npm run start
+2. Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
 
-# watch mode
-$ npm run start:dev
+    ```bash
+    NODE_ENV=development
+    PORT=3000
 
-# production mode
-$ npm run start:prod
-```
+    DATABASE_URL=postgres://<usuário>:<senha>@<host>:<porta>/<nomedobanco>
+    REDIS_URL=redis://<usuário>:<senha>@<host>:<porta>/<database>
 
-## Run tests
+    JWT_SECRET=COLOQUE UMA CHAVE SECRETA AQUI
+    JWT_EXPIRES_IN=1d
 
-```bash
-# unit tests
-$ npm run test
+    EMAIL_USER=EMAIL QUE VAI SER USADO PARA ENVIAR OS EMAILS
+    EMAIL_PASS=SENHA DO EMAIL QUE VAI SER USADO PARA ENVIAR OS EMAILS
 
-# e2e tests
-$ npm run test:e2e
+    MAX_FAILED_ATTEMPTS=5
+    LOCK_TIME=3600000
 
-# test coverage
-$ npm run test:cov
-```
+    BASE_URL_FRONTEND=http://localhost:5173
+    MAIN_ADMIN=EMAIL DO ADMINISTRADOR PRINCIPAL
+    ```
 
-## Resources
+## 🚀 Executando a Aplicação
 
-Check out a few resources that may come in handy when working with NestJS:
+1. Inicie o servidor no modo de desenvolvimento:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+    ```bash
+    $ npm run start:dev
+    ```
 
-## Support
+## 📚 Documentação da API
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+A documentação da API estará disponível em http://localhost:3000/api enquanto a aplicação estiver rodando no modo de desenvolvimento.
 
-## Stay in touch
+## 🔗 Recursos Úteis
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Aqui estão alguns links úteis para trabalhar com NestJS:
 
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- [Documentação do NestJS](https://docs.nestjs.com/)
+- [Canal do Discord](https://discord.com/invite/nestjs)
+- [Cursos Oficiais](https://nestjs.com/courses)
+- [NestJS Devtools](https://docs.nestjs.com/devtools/overview)
