@@ -1,9 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { join } from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import * as hbs from 'hbs';
 import { ValidationPipe } from '@nestjs/common';
+import * as dotenv from 'dotenv';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -17,12 +18,19 @@ async function bootstrap() {
     }),
   );
 
-  app.setBaseViewsDir(join(__dirname, './', 'views'));
-  app.setViewEngine('hbs');
-  hbs.registerPartials(join(__dirname, './', 'views/partials'));
+  app.enableCors(); // Habilita o CORS globalmente
 
-  app.useStaticAssets(join(__dirname, './', '/views/svg'));
+  if (process.env.NODE_ENV === 'development') {
+    const config = new DocumentBuilder()
+      .setTitle('aplicação cooperescrita backend')
+      .setVersion('1.0')
+      .addBearerAuth()
+      .build();
 
-  await app.listen(3000);
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api', app, document);
+  }
+
+  await app.listen(process.env.PORT);
 }
 bootstrap();
